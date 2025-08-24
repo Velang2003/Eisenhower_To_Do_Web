@@ -40,4 +40,5 @@ git clone https://github.com/Velang2003/Eisenhower_To_Do_Web.git
 # Navigate to the project directory
 cd Eisenhower_To_Do_Web
 
-Run **index.html** in your Browser
+# Run
+index.html # in your Browser
