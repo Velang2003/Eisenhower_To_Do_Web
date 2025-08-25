@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eisenhower To-Do List</title>
+  <link rel="icon" href="src/image.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-tasks"></i> Eisenhower Matrix</h1>
+      <p>Organize your tasks based on urgency and importance for better productivity</p>
+    </div>
+
+    <!-- Removed theme-toggle div -->
+
+    <div class="stats-bar">
+      <div class="stat-item">
+        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+        <span>Completed: <span class="stat-number" id="completed-count">0</span></span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-clock" style="color: var(--warning-color);"></i>
+        <span>Due Today: <span class="stat-number" id="due-today-count">0</span></span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-exclamation-triangle" style="color: var(--danger-color);"></i>
+        <span>Overdue: <span class="stat-number" id="overdue-count">0</span></span>
+      </div>
+    </div>
+
+    <div class="input-section">
+      <div class="input-group">
+        <input type="text" id="taskInput" placeholder="✏️ What needs to be done?" onkeypress="handleKeyPress(event)">
+      </div>
+      <div class="input-group">
+        <input type="date" id="deadlineInput">
+      </div>
+      <div class="input-group">
+        <select id="quadrantSelect">
+          <option value="q1">🚨 Urgent & Important</option>
+          <option value="q2">⚠️ Urgent & Not Important</option>
+          <option value="q3">✅ Not Urgent & Important</option>
+          <option value="q4">📋 Not Urgent & Not Important</option>
+        </select>
+      </div>
+      <button class="add-btn" onclick="addTask()">
+        <i class="fas fa-plus"></i> Add Task
+      </button>
+    </div>
+
+    <div class="grid">
+      <div class="quadrant" id="q1" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)"
+        ondragleave="removeHighlight(event)">
+        <div class="quadrant-header">
+          <h2>🚨 Urgent & Important <span class="task-count" id="q1-count">0</span></h2>
+        </div>
+        <ul class="taskList">
+          <li class="empty-state">Drag important and urgent tasks here</li>
+        </ul>
+      </div>
+
+      <div class="quadrant" id="q2" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)"
+        ondragleave="removeHighlight(event)">
+        <div class="quadrant-header">
+          <h2>⚠️ Urgent & Not Important <span class="task-count" id="q2-count">0</span></h2>
+        </div>
+        <ul class="taskList">
+          <li class="empty-state">Drag urgent but not important tasks here</li>
+        </ul>
+      </div>
+
+      <div class="quadrant" id="q3" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)"
+        ondragleave="removeHighlight(event)">
+        <div class="quadrant-header">
+          <h2>✅ Not Urgent & Important <span class="task-count" id="q3-count">0</span></h2>
+        </div>
+        <ul class="taskList">
+          <li class="empty-state">Drag important but not urgent tasks here</li>
+        </ul>
+      </div>
+
+      <div class="quadrant" id="q4" ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="highlight(event)"
+        ondragleave="removeHighlight(event)">
+        <div class="quadrant-header">
+          <h2>📋 Not Urgent & Not Important <span class="task-count" id="q4-count">0</span></h2>
+        </div>
+        <ul class="taskList">
+          <li class="empty-state">Drag tasks that can wait here</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="completed-tasks">
+      <div class="completed-header">
+        <h3><i class="fas fa-check-circle"></i> Completed Tasks</h3>
+        <button class="toggle-completed" onclick="toggleCompletedTasks()">
+          <i class="fas fa-chevron-down"></i> Show/Hide
+        </button>
+      </div>
+      <ul class="completed-list" id="completedList"></ul>
+    </div>
+  </div>
+
+  <script src="script/script.js"></script>
+</body>
+
+</html>
